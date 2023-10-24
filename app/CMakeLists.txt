@@ -1,0 +1,9 @@
+set(EXEC_SOURCES main.cpp)
+add_executable(${EXECUTABLE_NAME} ${EXEC_SOURCES})
+target_compile_features(${EXECUTABLE_NAME} PRIVATE cxx_std_20)
+
+target_link_libraries(${EXECUTABLE_NAME} PUBLIC ${LIBRARY_NAME}
+${GLEW_STATIC_LIBRARIES}
+${SDL_STATIC_LIBRARIES}
+${GLFW_STATIC_LIBRARIES}
+)

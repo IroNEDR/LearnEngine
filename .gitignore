@@ -1,0 +1,13 @@
+/out
+bin/
+build/
+.vscode/
+.idea/
+CMakeSettings.json
+libs/*
+*.vcxproj*
+Debug
+CMakeFiles
+*.dir
+CMakeCache.txt
+cmake_install.cmake
