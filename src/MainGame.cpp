@@ -1,13 +1,15 @@
 #include <iostream>
-#include <GL/glew.h>
+// #include <GL/glew.h>
 
 #include "Errors.h"
 #include "MainGame.h"
+#include "ImageLoader.h"
 
 void MainGame::run()
 {
     initSystems();
     _sprite.init(-1.0f, -1.0f, 2.0f, 2.0f);
+    this->_playerTexture = ImageLoader::loadPNG("textures/jimmyJump_pack/PNG/CharacterRight_Standing.png");
     gameLoop();
 }
 
@@ -45,7 +47,7 @@ void MainGame::initSystems()
 
 void MainGame::initShaders()
 {
-    this->_colorProgram.compileShaders("Shaders/colorShading.vert", "Shaders/colorShading.frag");
+    this->_colorProgram.compileShaders("shaders/colorShading.vert", "shaders/colorShading.frag");
     this->_colorProgram.addAttribute("vertexPosition");
     this->_colorProgram.addAttribute("vertexColor");
     this->_colorProgram.linkShaders();
@@ -56,16 +58,25 @@ void MainGame::gameLoop()
     while ((*this)._gameState != GameState::EXIT)
     {
         processInput();
+        _time += 0.01f;
         drawGame();
     }
 }
 
 void MainGame::drawGame()
 {
+
     glClearDepth(1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     this->_colorProgram.use();
+
     this->_sprite.draw();
+
+    GLuint timeLocation = this->_colorProgram.getUniformLocation("time");
+
+    glUniform1f(timeLocation, this->_time);
+
     this->_colorProgram.unuse();
     SDL_GL_SwapWindow(_window);
 }

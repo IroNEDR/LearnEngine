@@ -17,6 +17,8 @@ public:
     void use();
     void unuse();
 
+    GLuint getUniformLocation(std::string_view uniformName);
+
 private:
     GLuint _programID{0};
     GLuint _vertexShaderID{0};

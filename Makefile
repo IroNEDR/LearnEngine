@@ -1,9 +1,10 @@
-BUILD_TYPE=Debug
+BUILD_TYPE=Release
 
 clean:
-	rm -rf build
 	mkdir build
 	cd build && cmake .. -DCOMPILE_EXECUTABLE=ON -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
 
 build:
-	cmake --build .
+	cmake --build ./build/ --config ${BUILD_TYPE}
+
+.PHONY: clean build

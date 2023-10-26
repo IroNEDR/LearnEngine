@@ -1,8 +1,10 @@
 
-#include "Errors.h"
 #include <fstream>
 #include <string>
+#include <string_view>
+#include <vector>
 #include "GLSLProgram.h"
+#include "Errors.h"
 
 void GLSLProgram::compileShaders(const std::string_view vertexShaderFilePath, const std::string_view fragmentShaderFilePath)
 {
@@ -116,12 +118,23 @@ void GLSLProgram::compileShader(std::string_view filePath, GLuint shaderID)
         GLint maxLength{0};
         glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &maxLength);
 
-        char *errorLog = nullptr;
-        glGetShaderInfoLog(shaderID, maxLength, &maxLength, errorLog);
+        std::vector<char> errorLog(maxLength);
+        glGetShaderInfoLog(shaderID, maxLength, &maxLength, &errorLog[0]);
 
         glDeleteShader(shaderID);
-        std::printf("%s\n", errorLog);
+        std::printf("%s\n", &errorLog[0]);
         Errors::fatalError("Shader at " + std::string(filePath) + " failed to compile");
         return;
     }
+}
+
+GLuint GLSLProgram::getUniformLocation(std::string_view uniformName)
+{
+
+    GLint location = glGetUniformLocation(this->_programID, uniformName.data());
+    if (location == GL_INVALID_INDEX)
+    {
+        Errors::fatalError("Uniform " + std::string(uniformName) + " not found in shader!");
+    }
+    return location;
 }

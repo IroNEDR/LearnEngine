@@ -11,3 +11,5 @@ CMakeFiles
 *.dir
 CMakeCache.txt
 cmake_install.cmake
+.vs
+textures

@@ -37,18 +37,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(EXECUTABLE_NAME "GameEngine")
 
 
-set(GLEW_STATIC_LIBRARIES 
-    "${CMAKE_SOURCE_DIR}/lib/GLEW/glew32s.lib"
-)
-
-set(SDL_STATIC_LIBRARIES 
-    "${CMAKE_SOURCE_DIR}/libs/SDL2/x64/SDL2.lib"
-    "${CMAKE_SOURCE_DIR}/libs/SDL2/x64/SDL2main.lib"
-)
-
-set(GLFW_STATIC_LIBRARIES 
-    "${CMAKE_SOURCE_DIR}/libs/GLFW/lib-vc2022/glfw3.lib"
-)
 add_subdirectory(src)
 
 add_subdirectory(app)
+
