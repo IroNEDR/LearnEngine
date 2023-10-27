@@ -1,4 +1,4 @@
-BUILD_TYPE=Release
+BUILD_TYPE=Debug
 
 clean:
 	mkdir build
