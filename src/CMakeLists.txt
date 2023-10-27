@@ -27,7 +27,8 @@ set(LIBRARY_SOURCE_FILES
     "GLSLProgram.cpp"
     "IOManager.cpp"
     "picoPNG.cpp"
-    "ImageLoader.cpp")
+    "ImageLoader.cpp"
+    "Vertex.cpp")
 
 
 

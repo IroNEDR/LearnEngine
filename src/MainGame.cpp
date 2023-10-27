@@ -50,6 +50,7 @@ void MainGame::initShaders()
     this->_colorProgram.compileShaders("shaders/colorShading.vert", "shaders/colorShading.frag");
     this->_colorProgram.addAttribute("vertexPosition");
     this->_colorProgram.addAttribute("vertexColor");
+    this->_colorProgram.addAttribute("vertexUV");
     this->_colorProgram.linkShaders();
 }
 
@@ -70,13 +71,16 @@ void MainGame::drawGame()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     this->_colorProgram.use();
-
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, this->_playerTexture.id);
+    GLint textureLocation = this->_colorProgram.getUniformLocation("mySampler");
+    glUniform1i(textureLocation, 0);
     this->_sprite.draw();
 
     GLuint timeLocation = this->_colorProgram.getUniformLocation("time");
 
     glUniform1f(timeLocation, this->_time);
-
+    glBindTexture(GL_TEXTURE_2D, 0);
     this->_colorProgram.unuse();
     SDL_GL_SwapWindow(_window);
 }
