@@ -1,9 +1,8 @@
-BUILD_TYPE=Debug
+BUILD_TYPE=Release
 
 clean:
 	mkdir build
-	cd build && cmake .. -DCOMPILE_EXECUTABLE=ON -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
-
+	cd build && cmake ..
 build:
 	cmake --build ./build/ --config ${BUILD_TYPE}
 

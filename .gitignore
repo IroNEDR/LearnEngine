@@ -4,7 +4,6 @@ build/
 .vscode/
 .idea/
 CMakeSettings.json
-libs/*
 *.vcxproj*
 Debug
 CMakeFiles

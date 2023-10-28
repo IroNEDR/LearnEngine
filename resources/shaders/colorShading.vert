@@ -5,7 +5,6 @@ in vec4 vertexColor;
 in vec2 vertexUV;
 
 // use keyword flat to disable interpolation
-// flat out vec4 fragmentColor;
 out vec2 fragmentPosition;
 out vec4 fragmentColor;
 out vec2 fragmentUV;

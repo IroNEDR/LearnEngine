@@ -1,5 +1,4 @@
 #include <iostream>
-// #include <GL/glew.h>
 
 #include "Errors.h"
 #include "MainGame.h"
@@ -9,7 +8,7 @@ void MainGame::run()
 {
     initSystems();
     _sprite.init(-1.0f, -1.0f, 2.0f, 2.0f);
-    this->_playerTexture = ImageLoader::loadPNG("textures/jimmyJump_pack/PNG/CharacterRight_Standing.png");
+    this->_playerTexture = ImageLoader::loadPNG("resources/textures/jimmyJump_pack/PNG/CharacterRight_Standing.png");
     gameLoop();
 }
 
@@ -47,7 +46,7 @@ void MainGame::initSystems()
 
 void MainGame::initShaders()
 {
-    this->_colorProgram.compileShaders("shaders/colorShading.vert", "shaders/colorShading.frag");
+    this->_colorProgram.compileShaders("resources/shaders/colorShading.vert", "resources/shaders/colorShading.frag");
     this->_colorProgram.addAttribute("vertexPosition");
     this->_colorProgram.addAttribute("vertexColor");
     this->_colorProgram.addAttribute("vertexUV");
@@ -73,7 +72,7 @@ void MainGame::drawGame()
     this->_colorProgram.use();
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, this->_playerTexture.id);
-    GLint textureLocation = this->_colorProgram.getUniformLocation("mySampler");
+    GLint textureLocation = this->_colorProgram.getUniformLocation("textureSampler");
     glUniform1i(textureLocation, 0);
     this->_sprite.draw();
 
